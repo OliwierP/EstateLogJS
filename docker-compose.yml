@@ -52,7 +52,7 @@ services:
       - app-network
 
   grafana:
-    image: grafana/grafana-oss:latest
+    image: grafana/grafana:latest
     container_name: grafana_visualization
     restart: unless-stopped
     ports:

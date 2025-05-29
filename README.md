@@ -1,4 +1,4 @@
-# docker-compose up --build -d
+# docker compose up --build -d
 
 ## App: http://localhost:3000
 
