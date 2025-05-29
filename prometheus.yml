@@ -1,0 +1,5 @@
+scrape_configs:
+  - job_name: 'node_app'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['app:3000']

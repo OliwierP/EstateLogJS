@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb
+    container_name: mariadb_db
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=api
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+      - MYSQL_ROOT_PASSWORD=rootpass
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./api.sql:/docker-entrypoint-initdb.d/api.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DB_HOST=db
+      - DB_USER=admin
+      - DB_PASSWORD=admin
+      - DB_NAME=api
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus_monitoring
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9090:9090"
+    depends_on:
+      - app
+    networks:
+      - app-network
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana_visualization
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - app-network
+
+volumes:
+  db_data: {}
+  prometheus_data: {}
+  grafana_data: {}
+
+networks:
+  app-network:
+    driver: bridge
