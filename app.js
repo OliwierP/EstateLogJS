@@ -20,7 +20,7 @@ app.use(metricsMiddleware);
 
 app.use(bodyParser.json());
 
-const mysql = require('mysql');
+
 const connection = mysql.createConnection({
   host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || 'admin',
