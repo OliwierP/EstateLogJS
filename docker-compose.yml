@@ -9,7 +9,7 @@ services:
       - MYSQL_DATABASE=api
       - MYSQL_USER=admin
       - MYSQL_PASSWORD=admin
-      - MYSQL_ROOT_PASSWORD=rootpass
+      - MYSQL_ROOT_PASSWORD=admin
     volumes:
       - db_data:/var/lib/mysql
       - ./api.sql:/docker-entrypoint-initdb.d/api.sql
