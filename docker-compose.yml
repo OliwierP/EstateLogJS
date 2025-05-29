@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: mariadb
+    image: mariadb:latest
     container_name: mariadb_db
     restart: unless-stopped
     environment:
@@ -37,7 +37,7 @@ services:
       - app-network
 
   prometheus:
-    image: prom/prometheus
+    image: prom/prometheus:latest
     container_name: prometheus_monitoring
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
@@ -52,7 +52,7 @@ services:
       - app-network
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana-oss:latest
     container_name: grafana_visualization
     restart: unless-stopped
     ports:
