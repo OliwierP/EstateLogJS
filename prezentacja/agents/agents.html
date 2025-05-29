@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prezentacja REST API</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="clientStyle.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="top">
+            <a href="../index.html">
+              <h1>Agenci</h1>
+            </a>
+            <hr />      
+        </div>
+        <div class="content">
+            <div class="row">
+              <a id="showAllLink" class="one-link" href="#">Pokaż wszystkich agentów</a>
+            </div>
+            <div class="row">
+              <div class="form-container">
+                <h2>Pokaż agentów po ID</h2>
+                <form id="agentForm">
+                  <label for="agentId">Agent ID:</label>
+                  <input type="text" id="agentIdInput" name="agentId">
+                  <br />
+                  <button type="submit">Pokaż</button>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-container">
+                <h2>Dodaj agenta</h2>
+                <form id="addAgentForm" method="POST">
+                  <label for="firstName">Imię:</label>
+                  <input type="text" id="firstNameInput" name="firstName" required>
+                  <br />
+                  <label for="lastName">Nazwisko:</label>
+                  <input type="text" id="lastNameInput" name="lastName" required>
+                  <br />
+                  <label for="email">Email:</label>
+                  <input type="email" id="emailInput" name="email" required>
+                  <br />
+                  <label for="phone">Telefon:</label>
+                  <input type="tel" id="phoneInput" name="phone" required>
+                  <br />
+                  <label for="position">Pozycja:</label>
+                  <input type="text" id="positionInput" name="position" required>
+                  <br />
+                  <button type="submit">Dodaj</button>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-container">
+                <h2>Zaktualizuj agenta</h2>
+                <form id="updateAgentForm">
+                  <label for="updateAgentId">Agent ID:</label>
+                  <input type="text" id="updateAgentIdInput" name="agentId" required>
+                  <br />
+                  <label for="updateFirstName">Imię:</label>
+                  <input type="text" id="updateFirstNameInput" name="firstName" required>
+                  <br />
+                  <label for="updateLastName">Nazwisko:</label>
+                  <input type="text" id="updateLastNameInput" name="lastName" required>
+                  <br />
+                  <label for="updateEmail">Email:</label>
+                  <input type="email" id="updateEmailInput" name="email" required>
+                  <br />
+                  <label for="updatePhone">Telefon:</label>
+                  <input type="tel" id="updatePhoneInput" name="phone" required>
+                  <br />
+                  <label for="updatePosition">Pozycja:</label>
+                  <input type="text" id="updatePositionInput" name="position" required>
+                  <br />
+                  <button type="submit">Zaktualizuj</button>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-container">
+                <h2>Usuń agenta</h2>
+                <form id="deleteAgentForm">
+                  <label for="deleteAgentId">Agent ID:</label>
+                  <input type="text" id="deleteAgentIdInput" name="agentId" required>
+                  <br />
+                  <button type="submit">Usuń</button>
+                </form>
+              </div>
+            </div>
+            <div id="output"></div>
+          </div>
+    </div>
+<script src="agents.js"></script>
+</body>
+</html>

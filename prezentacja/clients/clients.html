@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prezentacja REST API</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="clientStyle.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="top">
+            <a href="../index.html">
+              <h1>Klienci</h1>
+            </a>
+            <hr />      
+        </div>
+        <div class="content">
+            <div class="row">
+              <a id="showAllLink" class="one-link" href="#">Pokaż wszystkich klientów</a>
+            </div>
+            <div class="row">
+              <div class="form-container">
+                <h2>Pokaż klientów po ID</h2>
+                <form id="clientForm">
+                  <label for="clientId">Klient ID:</label>
+                  <input type="text" id="clientIdInput" name="clientId">
+                  <br />
+                  <button type="submit">Pokaż</button>
+                </form>
+              </div>
+              <!-- <a class="one-link" href="#">View Client</a> -->
+            </div>
+            <div class="row">
+              <div class="form-container">
+                <h2>Dodaj klienta</h2>
+                <form id="addClientForm" method="POST">
+                  <label for="firstName">Imię:</label>
+                  <input type="text" id="firstNameInput" name="firstName" required>
+                  <br />
+                  <label for="lastName">Nazwisko:</label>
+                  <input type="text" id="lastNameInput" name="lastName" required>
+                  <br />
+                  <label for="email">Email:</label>
+                  <input type="email" id="emailInput" name="email" required>
+                  <br />
+                  <label for="phone">Telefon:</label>
+                  <input type="tel" id="phoneInput" name="phone" required>
+                  <br />
+                  <button type="submit">Dodaj</button>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-container">
+                <h2>Zaktualizuj klienta</h2>
+                <form id="updateClientForm">
+                  <label for="updateClientId">Klient ID:</label>
+                  <input type="text" id="updateClientIdInput" name="clientId" required>
+                  <br />
+                  <label for="updateFirstName">Imię:</label>
+                  <input type="text" id="updateFirstNameInput" name="firstName" required>
+                  <br />
+                  <label for="updateLastName">Nazwisko:</label>
+                  <input type="text" id="updateLastNameInput" name="lastName" required>
+                  <br />
+                  <label for="updateEmail">Email:</label>
+                  <input type="email" id="updateEmailInput" name="email" required>
+                  <br />
+                  <label for="updatePhone">Telefon:</label>
+                  <input type="tel" id="updatePhoneInput" name="phone" required>
+                  <br />
+                  <button type="submit">Zaktualizuj</button>
+                </form>
+              </div>
+              
+            </div>
+            <div class="row">
+              <form id="deleteClientForm">
+                <label for="deleteClientId">Klient ID:</label>
+                <input type="text" id="deleteClientIdInput" name="clientIdD" required>
+                <br />
+                <button type="submit">Usuń</button>
+              </form>
+            </div>
+            <div id="output"></div>
+          </div>
+    </div>
+<script src="clients.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prezentacja REST API</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="clientStyle.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="top">
+            <a href="../index.html">
+              <h1>Transactions</h1>
+            </a>
+            <hr />      
+        </div>
+        <div class="content">
+            <div class="row">
+              <a id="showAllLink" class="one-link" href="#">Pokaż wszystkie transakcje</a>
+            </div>
+            <div class="row">
+              <div class="form-container">
+                <h2>Pokaż transakcję po ID</h2>
+                <form id="transactionForm">
+                  <label for="transactionId">ID transakcji:</label>
+                  <input type="text" id="transactionIdInput" name="transactionId">
+                  <br />
+                  <button type="submit">Pokaż</button>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-container">
+                <h2>Dodaj transakcję</h2>
+                <form id="addTransactionForm" method="POST">
+                  <label for="clientId">ID klienta:</label>
+                  <input type="text" id="clientIdInput" name="clientId" required>
+                  <br />
+                  <label for="agentId">ID agenta:</label>
+                  <input type="text" id="agentIdInput" name="agentId" required>
+                  <br />
+                  <label for="estateId">ID nieruchomości:</label>
+                  <input type="text" id="estateIdInput" name="estateId" required>
+                  <br />
+                  <label for="dateInput">Date:</label>
+                  <input type="date" id="dateInput" name="date" required>
+                  <br />
+                  <label for="stateInput">Stan:</label>
+                  <select id="stateInput" name="state" required>
+                    <option value="1">Zapłacony</option>
+                    <option value="2">Na kredyt</option>
+                    <option value="3">Do zapłacenia</option>
+                  </select>
+                  <br />
+                  <button type="submit">Dodaj</button>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-container">
+                <h2>Zaktualizuj transakcję</h2>
+                <form id="updateTransactionForm">
+                  <label for="updateTransactionId">ID transakcji:</label>
+                  <input type="text" id="updateTransactionIdInput" name="transactionId" required>
+                  <br />
+                  <label for="updateClientId">ID klienta:</label>
+                  <input type="text" id="updateClientIdInput" name="clientId" required>
+                  <br />
+                  <label for="updateAgentId">ID agenta:</label>
+                  <input type="text" id="updateAgentIdInput" name="agentId" required>
+                  <br />
+                  <label for="updateEstateId">ID nieruchomości:</label>
+                  <input type="text" id="updateEstateIdInput" name="estateId" required>
+                  <br />
+                  <label for="updateDateInput">Date:</label>
+                  <input type="date" id="updateDateInput" name="date" required>
+                  <br />
+                  <label for="updateStateInput">Stan:</label>
+                  <select id="updateStateInput" name="state" required>
+                    <option value="1">Zapłacony</option>
+                    <option value="2">Na kredyt</option>
+                    <option value="3">Do zapłacenia</option>
+                  </select>
+                  <br />
+                  <button type="submit">Zaktualizuj</button>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-container">
+                <h2>Usuń transakcję</h2>
+                <form id="deleteTransactionForm">
+                  <label for="deleteTransactionId">ID transakcji:</label>
+                  <input type="text" id="deleteTransactionIdInput" name="transactionId" required>
+                  <br />
+                  <button type="submit">Usuń</button>
+                </form>
+              </div>
+            </div>
+            <div id="output"></div>
+          </div>
+    </div>
+<script src="transactions.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prezentacja REST API</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="clientStyle.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="top">
+            <a href="../index.html">
+              <h1>Estates</h1>
+            </a>
+            <hr />      
+        </div>
+        <div class="content">
+            <div class="row">
+              <a id="showAllLink" class="one-link" href="#">Pokaż wszystkie nieruchomości</a>
+            </div>
+            <div class="row">
+              <div class="form-container">
+                <h2>Pokaż nieruchomość po ID</h2>
+                <form id="estateForm">
+                  <label for="estateId">ID nieruchomości:</label>
+                  <input type="text" id="estateIdInput" name="estateId">
+                  <br />
+                  <button type="submit">Pokaż</button>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-container">
+                <h2>Dodaj nieruchomość</h2>
+                <form id="addEstateForm" method="POST">
+                  <label for="name">Nazwa:</label>
+                  <input type="text" id="nameInput" name="name" required>
+                  <br />
+                  <label for="address">Adres:</label>
+                  <input type="text" id="addressInput" name="address" required>
+                  <br />
+                  <label for="price">Cena:</label>
+                  <input type="text" id="priceInput" name="price" required>
+                  <br />
+                  <label for="isBoughtInput">Is Bought:</label>
+                  <select id="isBoughtInput" name="isBought" required>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                  </select>
+                  <br />
+                  <button type="submit">Dodaj</button>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-container">
+                <h2>Zaktualizuj nieruchomość</h2>
+                <form id="updateEstateForm">
+                  <label for="updateEstateId">ID nieruchomości:</label>
+                  <input type="text" id="updateEstateIdInput" name="estateId" required>
+                  <br />
+                  <label for="updateNameInput">Nazwa:</label>
+                  <input type="text" id="updateNameInput" name="name" required>
+                  <br />
+                  <label for="updateAddressInput">Adres:</label>
+                  <input type="text" id="updateAddressInput" name="address" required>
+                  <br />
+                  <label for="updatePriceInput">Cena:</label>
+                  <input type="text" id="updatePriceInput" name="price" required>
+                  <br />
+                  <label for="updateIsBoughtInput">Czy kupiona:</label>
+                  <select id="updateIsBoughtInput" name="isBought" required>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                  </select>
+                  <br />
+                  <button type="submit">Zaktualizuj</button>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-container">
+                <h2>Usuń nieruchomość</h2>
+                <form id="deleteEstateForm">
+                  <label for="deleteEstateId">ID nieruchomości:</label>
+                  <input type="text" id="deleteEstateIdInput" name="estateId" required>
+                  <br />
+                  <button type="submit">Usuń</button>
+                </form>
+              </div>
+            </div>
+            <div id="output"></div>
+          </div>
+    </div>
+<script src="estates.js"></script>
+</body>
+</html>
