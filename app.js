@@ -2,23 +2,16 @@ const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const promBundle = require('express-prom-bundle');
+const fs = require('fs');
+const logStream = fs.createWriteStream('api.log', { flags: 'a' });
 
 const app = express();
 
 
 app.use(cors());
 
-app.use(express.static('public'));
+//app.use(express.static('public'));
 
-
-const metricsMiddleware = promBundle({
-  includeMethod: true,      
-  includePath: true,          
-  includeStatusCode: true,   
-  normalizePath: true       
-});
-app.use(metricsMiddleware);
 
 app.use(bodyParser.json());
 
@@ -29,6 +22,77 @@ const connection = mysql.createConnection({
   password: process.env.DB_PASSWORD || 'admin',
   database: process.env.DB_NAME || 'api'
 });
+
+
+app.use((req, res, next) => {
+  const start = Date.now();
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+  res.on('finish', () => {
+    const duration = Date.now() - start;
+    const logEntry = `[${new Date().toISOString()}] IP: ${ip} ${req.method} ${req.url} ${res.statusCode} ${duration}ms\n`;
+    logStream.write(logEntry);
+  });
+
+  next();
+});
+
+
+const path = require('path'); 
+
+
+app.use(express.static(path.join(__dirname, 'prezentacja')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'prezentacja', 'index.html'));
+});
+
+
+
+// 1. Inicjalizacja systemu logowania
+let errorCount = 0;
+let requestCount = 0;
+
+
+app.use((req, res, next) => {
+  requestCount++;
+  const logEntry = `[${new Date().toISOString()}] ${req.method} ${req.url}\n`;
+  logStream.write(logEntry);
+  next();
+});
+
+// 2. Endpointy do monitorowania logów
+app.get('/monitoring/logs', (req, res) => {
+  fs.readFile('api.log', 'utf8', (err, data) => {
+    if (err) {
+      errorCount++;
+      return res.status(500).json({ error: 'Cannot read logs' });
+    }
+    res.type('text/plain').send(data);
+  });
+});
+
+app.get('/monitoring/stats', (req, res) => {
+  res.json({
+    uptime: process.uptime(),
+    totalRequests: requestCount,
+    totalErrors: errorCount,
+    lastUpdated: new Date().toISOString()
+  });
+});
+
+
+app.get('/error-test', (req, res, next) => {
+  next(new Error('Testowy błąd!'));
+});
+
+// Globalny middleware do obsługi błędów
+app.use((err, req, res, next) => {
+  errorCount++;
+  logStream.write(`[CRITICAL] ${new Date().toISOString()} Unhandled error: ${err.stack}\n`);
+  res.status(500).json({ error: 'Internal server error' });
+});
+
 
 connection.connect(err => {
   if (err) {
