@@ -9,6 +9,8 @@ const app = express();
 
 app.use(cors());
 
+app.use(express.static('public'));
+
 
 const metricsMiddleware = promBundle({
   includeMethod: true,      
