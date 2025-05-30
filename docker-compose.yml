@@ -5,6 +5,11 @@ services:
     image: mariadb:latest
     container_name: mariadb_db
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb --user=$$MYSQL_USER --password=$$MYSQL_PASSWORD --execute='SELECT 1;'"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
     environment:
       - MYSQL_DATABASE=api
       - MYSQL_USER=admin
@@ -19,7 +24,8 @@ services:
   app:
     build: .
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
     environment:
       - DB_HOST=mariadb
       - DB_USER=admin
